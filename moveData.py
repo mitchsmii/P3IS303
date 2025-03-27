@@ -10,20 +10,40 @@
 from openpyxl import load_workbook
 
 def organizeData(iCount):
+    currSheet = myworkbook.active
     data = currSheet["B" + str(iCount)].value
     lName, fName, idNum = data.split('_')
-    currSheet["F" + str(iCount)] = lName
-    currSheet["G" + str(iCount)] = fName
-    currSheet["H" + str(iCount)] = idNum
+    currSheet = myworkbook[currSheet["A" + str(iCount)].value]
+    currSheet["A" + str(iCount)] = lName
+    currSheet["B" + str(iCount)] = fName
+    currSheet["C" + str(iCount)] = idNum
 
 myworkbook = load_workbook("Poorly_Organized_Data_1.xlsx")
-
 currSheet = myworkbook.active
 
 value = currSheet["A2"].value
 print(value)
 iCount = 2
+
+myworkbook.create_sheet("Algebra")
 while currSheet["A" + str(iCount)].value == "Algebra":
+    organizeData(iCount)
+    currSheet = myworkbook["Algebra"]
+    iCount += 1
+myworkbook.create_sheet("Trigonometry")
+while currSheet["A" + str(iCount)].value == "Trigonometry":
+    organizeData(iCount)
+    iCount += 1
+myworkbook.create_sheet("Geometry")
+while currSheet["A" + str(iCount)].value == "Geometry":
+    organizeData(iCount)
+    iCount += 1
+myworkbook.create_sheet("Calculus")
+while currSheet["A" + str(iCount)].value == "Calculus":
+    organizeData(iCount)
+    iCount += 1
+myworkbook.create_sheet("Statistics")
+while currSheet["A" + str(iCount)].value == "Statistics":
     organizeData(iCount)
     iCount += 1
 
