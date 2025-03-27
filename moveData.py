@@ -9,14 +9,12 @@
 from openpyxl import Workbook
 
 def organizeData(iCount):
-    data = currSheet["B" + iCount]
+    data = currSheet["B" + str(iCount)]
     data.split('_')
     lName = data[0]
     fName = data[1]
     idNum = data[2]
-    currSheet["F" + str(iCount)] = lName
-    currSheet["G" + str(iCount)] = fName
-    currSheet["H" + str(iCount)] = idNum
+    return lName, fName, idNum
 
 myworkbook = Workbook()
 
@@ -24,7 +22,10 @@ currSheet = myworkbook.active
 
 iCount = 2
 while currSheet["A" + str(iCount)] == "Algebra":
-    organizeData(iCount)
+    lName, fName, idNum = organizeData(iCount)
     iCount += 1
+    currSheet["A" + str(iCount)] = lName
+    currSheet["B" + str(iCount)] = fName
+    currSheet["C" + str(iCount)] = idNum
 
 myworkbook.save(filename= "Poorly_Organized_Data_1 (1).xlsx")
