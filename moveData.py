@@ -6,3 +6,25 @@
 
 
 # 
+
+from openpyxl import load_workbook
+
+def organizeData(iCount):
+    data = currSheet["B" + str(iCount)].value
+    lName, fName, idNum = data.split('_')
+    currSheet["F" + str(iCount)] = lName
+    currSheet["G" + str(iCount)] = fName
+    currSheet["H" + str(iCount)] = idNum
+
+myworkbook = load_workbook("Poorly_Organized_Data_1.xlsx")
+
+currSheet = myworkbook.active
+
+value = currSheet["A2"].value
+print(value)
+iCount = 2
+while currSheet["A" + str(iCount)].value == "Algebra":
+    organizeData(iCount)
+    iCount += 1
+
+myworkbook.save(filename= "Poorly_Organized_Data_1.xlsx")
