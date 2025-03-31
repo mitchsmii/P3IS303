@@ -9,15 +9,16 @@
 
 from openpyxl import load_workbook
 
-def organizeData(iCount):
+def organizeData(iCount2):
     currSheet = myworkbook["Grades"]
     myworkbook.active = myworkbook["Grades"]
     data = currSheet["B" + str(iCount)].value
     lName, fName, idNum = data.split('_')
     currSheet = myworkbook[currSheet["A" + str(iCount)].value]
-    currSheet["A" + str(iCount)] = lName
-    currSheet["B" + str(iCount)] = fName
-    currSheet["C" + str(iCount)] = idNum
+    currSheet["A" + str(iCount2)] = lName
+    currSheet["B" + str(iCount2)] = fName
+    currSheet["C" + str(iCount2)] = idNum
+    currSheet = myworkbook["Grades"]
     myworkbook.active = myworkbook["Grades"]
 
 myworkbook = load_workbook("Poorly_Organized_Data_1.xlsx")
@@ -25,25 +26,39 @@ currSheet = myworkbook["Grades"]
 
 iCount = 2
 
+iCount2 = 2
 myworkbook.create_sheet("Algebra", 1)
 while currSheet["A" + str(iCount)].value == "Algebra":
-    organizeData(iCount)
+    organizeData(iCount2)
     iCount += 1
+    iCount2 += 1
+
 myworkbook.create_sheet("Trigonometry", 2)
+iCount2 = 2
 while currSheet["A" + str(iCount)].value == "Trigonometry":
-    organizeData(iCount)
+    organizeData(iCount2)
     iCount += 1
+    iCount2 += 1
+
 myworkbook.create_sheet("Geometry", 3)
+iCount2 = 2
 while currSheet["A" + str(iCount)].value == "Geometry":
-    organizeData(iCount)
+    organizeData(iCount2)
     iCount += 1
+    iCount2 += 1
+
 myworkbook.create_sheet("Calculus", 4)
+iCount2 = 2
 while currSheet["A" + str(iCount)].value == "Calculus":
-    organizeData(iCount)
+    organizeData(iCount2)
     iCount += 1
+    iCount2 += 1
+
 myworkbook.create_sheet("Statistics", 5)
+iCount2 = 2
 while currSheet["A" + str(iCount)].value == "Statistics":
-    organizeData(iCount)
+    organizeData(iCount2)
     iCount += 1
+    iCount2 += 1
 
 myworkbook.save(filename= "Poorly_Organized_Data_1.xlsx")
