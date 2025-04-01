@@ -1,6 +1,9 @@
 import openpyxl
 from openpyxl import Workbook
 from statistics import mean, median
+from openpyxl.styles import Font
+from openpyxl.utils import get_column_letter
+
 
 # Modified function to split the data and also transfer the grade.
 def organize_data(wb, input_row, output_row):
@@ -122,9 +125,24 @@ for i in range(2, grades_sheet.max_row + 1):
     output_row = target_sheet.max_row + 1  # Append to the bottom of the target sheet
     organize_data(output_wb, i, output_row)
 
+# Bolds  and  autofits the headers in each sheet
+for sheet in output_wb.sheetnames:
+    ws = output_wb[sheet]
+    
+    for col in [1, 2, 3, 4, 6, 7]:  # Only columns A-D, F-G
+        header_cell = ws.cell(row=1, column=col)
+        if header_cell.value:  # Check if there's a header to avoid errors
+            header_cell.font = Font(bold=True)  # Bold the header
+            ws.column_dimensions[get_column_letter(col)].width = (len(header_cell.value) + 2)  # Autofit
+
 # Save the output workbook.
 output_wb.save(output_worksheet)
 
 # Apply filters (compute summary stats) on each class sheet.
 # Here, we assume that in each class sheet the Grade is in column D (i.e. index 4).
 set_filters_all_sheets(output_worksheet, grade_column=4)
+
+# output_wb.save(output_worksheet)
+
+# close workbook
+output_wb.close()
