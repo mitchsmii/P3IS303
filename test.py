@@ -69,7 +69,7 @@ def set_filters_all_sheets(file_path, grade_column=4):
 
 # Define input and output workbook filenames.
 input_worksheet = 'Poorly_Organized_Data_1.xlsx'
-output_worksheet = 'IS303p3.xlsx'
+output_worksheet = 'formatted_grades.xlsx'
 
 # Load the input workbook and get its active sheet.
 input_wb = openpyxl.load_workbook(input_worksheet)
@@ -134,6 +134,15 @@ for sheet in output_wb.sheetnames:
         if header_cell.value:  # Check if there's a header to avoid errors
             header_cell.font = Font(bold=True)  # Bold the header
             ws.column_dimensions[get_column_letter(col)].width = (len(header_cell.value) + 2)  # Autofit
+
+# Add filters to each sheet in the workbook
+# This section was written with the assistance of AI
+for sheet_name in output_wb.sheetnames:
+    if sheet_name == "Grades":
+        continue  # Skip the "Grades" sheet if filters are not needed there
+    ws = output_wb[sheet_name]
+    # Apply filter to the range covering columns A to D (Last Name, First Name, ID Number, Grade)
+    ws.auto_filter.ref = f"A1:D{ws.max_row}"
 
 # Save the output workbook.
 output_wb.save(output_worksheet)
