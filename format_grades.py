@@ -1,3 +1,13 @@
+# Carson hendrix, Cohen Scott, Joseph Xiong, Justin Maxwell, Mitchell Smith, Will Knudson
+# Section 004
+# Professor Anderson
+# 04/02/2025
+
+# DESCRIPTION: Loops through the data in the excel file and moves it to the corresponding sheet
+# So it will split the last name, first name, and ID into a list, then appends the grade to the list as well
+# Then puts it on the sheet made for that class
+
+
 import openpyxl
 from openpyxl import Workbook
 from statistics import mean, median
