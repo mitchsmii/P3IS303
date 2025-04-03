@@ -1,4 +1,4 @@
-# Carson hendrix, Cohen Scott, Joseph Xiong, Justin Maxwell, Mitchell Smith, Will Knudson
+# Carson Hendrix, Cohen Scott, Joseph Xiong, Justin Maxwell, Mitchell Smith, Will Knudson
 # Section 004
 # Professor Anderson
 # 04/02/2025
